@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#123c2e">
+<meta name="description" content="Odisha Exam Desk - Free and premium-style mock test practice for Odisha competitive exams.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<title>Odisha Exam Desk | Mock Tests & Admin</title>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+<style>
+:root{--g:#123c2e;--g2:#1d6047;--cream:#f7f3e8;--y:#f2c94c;--ink:#17231d;--muted:#65736a;--line:#e3e8e1;--red:#b83b35}
+*{box-sizing:border-box}body{margin:0;background:#f4f6f2;color:var(--ink);font:15px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:var(--g);color:#fff;padding:15px max(18px,calc((100% - 1150px)/2));display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.brand{display:flex;gap:10px;align-items:center}.logo{width:42px;height:42px;border-radius:12px;background:var(--y);color:var(--g);display:grid;place-items:center;font-weight:950;font-size:18px}.brand b{display:block;font-size:17px}.brand small{color:#dce8df;font-size:11px}
+nav{display:flex;gap:8px;flex-wrap:wrap}.navbtn{background:transparent;color:#e9f2ec;border:1px solid #ffffff42;border-radius:9px;padding:8px 12px;cursor:pointer;font-weight:700}.navbtn.active{background:var(--y);color:var(--g);border-color:var(--y)}
+main{max-width:1150px;margin:auto;padding:24px 18px 55px}.hero{background:linear-gradient(120deg,var(--g),var(--g2));color:#fff;padding:28px;border-radius:20px}.eyebrow{color:var(--y);font-weight:850;font-size:11px;letter-spacing:1.5px}.hero h1{font-size:clamp(28px,4vw,42px);line-height:1.1;margin:8px 0}.hero p{color:#e0ebe4;max-width:700px;margin:0}
+h2{color:var(--g);margin:0 0 6px;font-size:22px}.muted{color:var(--muted);font-size:13px}.section{margin-top:26px}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}.card,.panel{background:white;border:1px solid var(--line);border-radius:15px;padding:17px}.card h3{margin:10px 0 4px;font-size:17px}.pill{display:inline-block;border-radius:99px;padding:4px 8px;background:#eaf2ec;color:var(--g);font-size:10px;font-weight:850}.pill.paid{background:#fff2cb;color:#725400}.meta{font-size:12px;color:var(--muted);margin:10px 0}.btn{border:0;border-radius:9px;padding:10px 14px;font-weight:800;cursor:pointer}.primary{background:var(--g);color:white}.yellow{background:var(--y);color:var(--g)}.soft{background:#edf2ed;color:var(--g)}.danger{background:#fff0ee;color:var(--red)}.btn:disabled{opacity:.4;cursor:not-allowed}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}.field{display:flex;flex-direction:column;gap:5px;margin:9px 0}.field label{font-size:12px;font-weight:800;color:#425148}.field input,.field select,.field textarea{width:100%;border:1px solid #d7ded6;border-radius:9px;padding:10px;font:inherit;background:#fff}.field textarea{min-height:76px;resize:vertical}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:0 12px}.wide{grid-column:1/-1}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}.tab{border:1px solid var(--line);background:white;padding:9px 13px;border-radius:9px;color:var(--g);font-weight:750;cursor:pointer}.tab.active{background:var(--g);color:white}
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.stat{background:#f7f8f5;border-radius:12px;padding:14px}.stat b{display:block;color:var(--g);font-size:24px}.stat span{font-size:12px;color:var(--muted)}
+.tablewrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line);white-space:nowrap}th{color:var(--g);background:#f5f7f3}
+.notice{background:#fff8df;border:1px solid #efdfa7;color:#5c4a14;padding:13px;border-radius:11px;font-size:13px;margin:12px 0}.success{background:#eaf7ee;border:1px solid #b8dec2;color:#1b6334;padding:11px;border-radius:10px;margin:10px 0;font-size:13px}.error{background:#fff0ee;border:1px solid #f0c4bf;color:#922f29;padding:11px;border-radius:10px;margin:10px 0;font-size:13px}
+.filebox{border:2px dashed #bdcbbf;border-radius:13px;padding:18px;text-align:center;background:#fafbf9}.filebox input{max-width:100%}.small{font-size:11px;color:var(--muted)}.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:#071a12c9;display:none;overflow:auto;padding:18px;z-index:4}.modal.show{display:block}.modalbox{background:white;max-width:800px;margin:20px auto;border-radius:16px;padding:20px}.option{display:block;width:100%;text-align:left;background:white;border:1px solid var(--line);border-radius:9px;padding:11px;margin:8px 0;cursor:pointer}.option.sel{border:2px solid var(--g);background:#edf5ef}.timer{font-weight:900;color:var(--red)}
+footer{background:#102f25;color:#dce8df;text-align:center;padding:23px;font-size:12px}footer b{color:var(--y)}
+@media(max-width:760px){.grid{grid-template-columns:1fr 1fr}.statgrid{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}.wide{grid-column:auto}}
+@media(max-width:480px){.grid{grid-template-columns:1fr}.hero{padding:22px}.statgrid{grid-template-columns:1fr 1fr}}
+</style></head>
+<body>
+<header><div class="brand"><div class="logo">OE</div><div><b>Odisha Exam Desk</b><small>Learn smarter. Practise daily. Revise effectively.</small></div></div>
+<nav><button class="navbtn active" data-view="home">Mock Tests</button><button class="navbtn" data-view="admin">Admin Panel</button><button class="navbtn" id="installAppBtn" hidden>Install App</button></nav></header>
+<main>
+<section id="homeView">
+ <div class="hero"><div class="eyebrow">ONLINE MOCK TEST PLATFORM</div><h1>Practise today.<br>Perform better tomorrow.</h1><p>Exam-focused mock tests for Odisha competitive examinations. Attempt questions, check your score and learn from explanations.</p></div>
+ <div class="section row between"><div><h2>Available Mock Tests</h2><div class="muted">Choose a test to begin practising.</div></div><div class="row"><button class="tab active" data-filter="all">All</button><button class="tab" data-filter="free">Free</button><button class="tab" data-filter="paid">Premium</button></div></div>
+ <div class="grid" id="publicTests"></div>
+ <div class="notice"><b>Premium:</b> Paid tests are listed for display only in this starter. Secure paid access requires a backend and verified payment integration.</div>
+</section>
+<section id="adminView" class="hidden">
+ <div class="row between"><div><div class="eyebrow" style="color:var(--g)">CONTENT MANAGEMENT</div><h1 style="margin:4px 0;color:var(--g)">Admin Dashboard</h1><div class="muted">Manage test details and import questions from Excel.</div></div><span class="pill">LOCAL DEMO ADMIN</span></div>
+ <div class="notice"><b>Important:</b> This admin panel stores data in this browser only. It has no secure login or shared database. Anyone who can open the published page may inspect its front-end data. Do not upload confidential questions or rely on it for paid-test security yet.</div>
+ <div class="statgrid"><div class="stat"><b id="statTests">0</b><span>Total tests</span></div><div class="stat"><b id="statQuestions">0</b><span>Questions loaded</span></div><div class="stat"><b id="statPaid">0</b><span>Premium test listings</span></div></div>
+ <div class="tabs"><button class="tab active" data-tab="import">Excel Upload</button><button class="tab" data-tab="manual">Create / Edit Test</button><button class="tab" data-tab="manage">Manage Tests</button><button class="tab" data-tab="backup">Backup & Restore</button></div>
+ <div id="tab-import" class="panel">
+  <h2>Import questions from Excel</h2><p class="muted">Upload an .xlsx or .xls file using the provided column format. One spreadsheet can contain multiple tests, grouped by test_id.</p>
+  <div class="filebox"><b>Choose your Excel question bank</b><p class="small">Supported: .xlsx and .xls · SheetJS is loaded from a CDN, so internet is required for Excel parsing.</p><input id="excelFile" type="file" accept=".xlsx,.xls"></div>
+  <div class="row" style="margin-top:12px"><button class="btn primary" id="importBtn">Import Excel questions</button><button class="btn soft" id="templateBtn">Download Excel template</button></div>
+  <div id="importMsg"></div>
+  <div class="notice"><b>Required columns:</b> test_id, title, exam, type, minutes, marks, negative, question, option_a, option_b, option_c, option_d, correct_answer, explanation. Use type = free or paid; correct_answer = A, B, C or D.</div>
+  <div class="small">Import behaviour: a test_id already in your saved list will be replaced by the imported version. New test IDs will be added.</div>
+ </div>
+ <div id="tab-manual" class="panel hidden">
+  <h2>Create a test manually</h2><p class="muted">Create the test shell here. Add questions using Excel upload for bulk entry.</p>
+  <form id="testForm"><input type="hidden" id="editId">
+   <div class="formgrid">
+    <div class="field"><label>Test ID *</label><input id="testId" required placeholder="e.g. odisha-si-gk-02"></div>
+    <div class="field"><label>Test title *</label><input id="testTitle" required placeholder="Odisha SI · General Knowledge"></div>
+    <div class="field"><label>Exam</label><input id="testExam" placeholder="Odisha SI"></div>
+    <div class="field"><label>Test type</label><select id="testType"><option value="free">Free</option><option value="paid">Premium / Paid</option></select></div>
+    <div class="field"><label>Duration (minutes)</label><input id="testMinutes" type="number" min="1" value="30"></div>
+    <div class="field"><label>Marks per correct answer</label><input id="testMarks" type="number" step="0.25" value="1"></div>
+    <div class="field"><label>Negative marks per wrong answer</label><input id="testNegative" type="number" step="0.25" value="0.25"></div>
+   </div>
+   <div class="row"><button class="btn primary" type="submit">Save test details</button><button class="btn soft" type="button" id="clearForm">Clear form</button></div><div id="formMsg"></div>
+  </form>
+ </div>
+ <div id="tab-manage" class="panel hidden">
+  <div class="row between"><div><h2>Manage tests</h2><div class="muted">Edit metadata, view question count or delete a test.</div></div><button class="btn soft" id="exportJson">Export backup JSON</button></div>
+  <div class="tablewrap"><table><thead><tr><th>Test</th><th>Exam</th><th>Type</th><th>Questions</th><th>Actions</th></tr></thead><tbody id="manageRows"></tbody></table></div>
+ </div>
+ <div id="tab-backup" class="panel hidden">
+  <h2>Backup & Restore</h2><p class="muted">Keep a backup of your test bank before changing browsers or devices.</p>
+  <div class="row"><button class="btn primary" id="backupBtn">Download full JSON backup</button><label class="btn soft" for="restoreFile">Restore JSON backup</label><input id="restoreFile" class="hidden" type="file" accept=".json"></div><div id="backupMsg"></div>
+ </div>
+</section>
+</main><footer><b>Odisha Exam Desk</b><br>For Odisha competitive exam aspirants · Learn smarter. Practise daily. Revise effectively.</footer>
+<div class="modal" id="quizModal"><div class="modalbox"><div class="row between"><div><h2 id="quizTitle">Mock Test</h2><span class="muted" id="quizCount"></span></div><div class="timer" id="quizTimer">00:00</div></div><div id="quizBody"></div><div class="row between" style="margin-top:15px"><button class="btn soft" id="quizPrev">Previous</button><div class="row"><button class="btn soft" id="quizNext">Next</button><button class="btn primary" id="quizSubmit">Submit</button></div></div></div></div>
+<script>
+const STORE="oed_phase2_tests_v1";
+const demo=[
+{id:"si-gk-01",title:"Odisha SI · General Knowledge",exam:"Odisha SI",type:"free",minutes:10,marks:1,negative:.25,items:[
+{q:"Which river is known as the 'Sorrow of Odisha'?",o:["Mahanadi","Brahmani","Baitarani","Rushikulya"],a:2,e:"The Baitarani is commonly known as the Sorrow of Odisha because of its flood-prone nature."},
+{q:"The Konark Sun Temple was built by which ruler?",o:["Anantavarman Chodaganga Deva","Narasimhadeva I","Kapilendra Deva","Purushottama Deva"],a:1,e:"Narasimhadeva I of the Eastern Ganga dynasty built the Konark Sun Temple."},
+{q:"Which is the largest brackish water lagoon in India?",o:["Pulicat Lake","Chilika Lake","Vembanad Lake","Sambhar Lake"],a:1,e:"Chilika Lake in Odisha is India's largest brackish water lagoon."}
+]},
+{id:"math-average-01",title:"Arithmetic · Average Practice",exam:"All Odisha Exams",type:"free",minutes:8,marks:1,negative:.25,items:[
+{q:"The average of 10, 20 and 30 is:",o:["15","20","25","30"],a:1,e:"Average = (10 + 20 + 30) ÷ 3 = 20."},
+{q:"The average of first five natural numbers is:",o:["2","3","4","5"],a:1,e:"(1 + 2 + 3 + 4 + 5) ÷ 5 = 3."}
+]},
+{id:"ossc-cgl-premium-01",title:"OSSC CGL · Mixed Practice Set",exam:"OSSC CGL",type:"paid",minutes:30,marks:1,negative:.25,items:[]}
+];
+let tests=loadTests(),filter="all",quiz=null,qIndex=0,chosen={},seconds=0,clock=null;
+function loadTests(){try{let x=JSON.parse(localStorage.getItem(STORE));return Array.isArray(x)?x:demo}catch(e){return demo}}
+function save(){localStorage.setItem(STORE,JSON.stringify(tests));renderAll()}
+const $=id=>document.getElementById(id);
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderPublic(){let arr=tests.filter(t=>filter==="all"||t.type===filter);$("publicTests").innerHTML=arr.map(t=>`<article class="card"><div class="row between"><span class="pill">${escapeHtml(t.exam||"Practice")}</span><span class="pill ${t.type==="paid"?"paid":""}">${t.type==="paid"?"PREMIUM":"FREE"}</span></div><h3>${escapeHtml(t.title)}</h3><div class="muted">${t.type==="paid"?"Premium listing":"Practice with instant result and explanations"}</div><div class="meta">◷ ${t.minutes} min &nbsp; · &nbsp; ${t.items.length} questions</div><button class="btn ${t.type==="paid"?"soft":"primary"}" ${t.type==="paid"||!t.items.length?"disabled":""} onclick="startQuiz('${escapeHtml(t.id)}')">${t.type==="paid"?"Premium access not enabled":t.items.length?"Start test →":"Questions coming soon"}</button></article>`).join("")||'<p class="muted">No tests in this category yet.</p>'}
+function renderManage(){$("manageRows").innerHTML=tests.map(t=>`<tr><td><b>${escapeHtml(t.title)}</b><br><span class="small">${escapeHtml(t.id)}</span></td><td>${escapeHtml(t.exam||"-")}</td><td>${t.type}</td><td>${t.items.length}</td><td><button class="btn soft" onclick="editTest('${escapeHtml(t.id)}')">Edit</button> <button class="btn danger" onclick="deleteTest('${escapeHtml(t.id)}')">Delete</button></td></tr>`).join("")}
+function renderStats(){$("statTests").textContent=tests.length;$("statQuestions").textContent=tests.reduce((n,t)=>n+t.items.length,0);$("statPaid").textContent=tests.filter(t=>t.type==="paid").length}
+function renderAll(){renderPublic();renderManage();renderStats()}
+document.querySelectorAll(".navbtn").forEach(b=>b.onclick=()=>{document.querySelectorAll(".navbtn").forEach(x=>x.classList.toggle("active",x===b));$("homeView").classList.toggle("hidden",b.dataset.view!=="home");$("adminView").classList.toggle("hidden",b.dataset.view!=="admin")});
+document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));renderPublic()});
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{document.querySelectorAll("[data-tab]").forEach(x=>x.classList.toggle("active",x===b));["import","manual","manage","backup"].forEach(k=>$("tab-"+k).classList.toggle("hidden",k!==b.dataset.tab))});
+function clearForm(){$("testForm").reset();$("editId").value="";$("testId").disabled=false;$("testMinutes").value=30;$("testMarks").value=1;$("testNegative").value=.25}
+$("clearForm").onclick=clearForm;
+$("testForm").onsubmit=e=>{e.preventDefault();let id=$("testId").value.trim(),old=tests.find(t=>t.id===id),edit=$("editId").value;let t={id,title:$("testTitle").value.trim(),exam:$("testExam").value.trim(),type:$("testType").value,minutes:+$("testMinutes").value,marks:+$("testMarks").value,negative:+$("testNegative").value,items:old?old.items:[]};if(!id||!t.title)return;if(edit&&edit!==id&&tests.some(x=>x.id===id)){$("formMsg").innerHTML='<div class="error">That test ID already exists.</div>';return}if(edit){let i=tests.findIndex(x=>x.id===edit);if(i>=0)tests[i]=t}else if(old){tests=tests.map(x=>x.id===id?t:x)}else tests.push(t);save();$("formMsg").innerHTML='<div class="success">Test details saved. Upload its questions using Excel.</div>';clearForm()};
+function editTest(id){let t=tests.find(x=>x.id===id);if(!t)return;document.querySelector('[data-tab="manual"]').click();$("editId").value=id;$("testId").value=t.id;$("testId").disabled=true;$("testTitle").value=t.title;$("testExam").value=t.exam||"";$("testType").value=t.type;$("testMinutes").value=t.minutes;$("testMarks").value=t.marks??1;$("testNegative").value=t.negative??.25}
+function deleteTest(id){if(!confirm("Delete this test and all its questions?"))return;tests=tests.filter(t=>t.id!==id);save()}
+function normalizeRow(r){let g={};Object.keys(r).forEach(k=>g[String(k).trim().toLowerCase().replace(/\s+/g,"_")]=r[k]);return g}
+function val(r,k,d=""){return r[k]===undefined||r[k]===null||r[k]===""?d:r[k]}
+$("importBtn").onclick=async()=>{let f=$("excelFile").files[0],msg=$("importMsg");if(!f){msg.innerHTML='<div class="error">Please select an Excel file first.</div>';return}if(!window.XLSX){msg.innerHTML='<div class="error">Excel reader could not load. Check your internet connection and reload.</div>';return}
+try{let buf=await f.arrayBuffer(),wb=XLSX.read(buf,{type:"array"}),ws=wb.Sheets[wb.SheetNames[0]],rows=XLSX.utils.sheet_to_json(ws,{defval:""}).map(normalizeRow);if(!rows.length)throw Error("The first sheet has no question rows.");let groups=new Map();for(let r of rows){let id=String(val(r,"test_id")).trim();if(!id)throw Error("Every row needs a test_id.");let correct=String(val(r,"correct_answer")).trim().toUpperCase();let a=["A","B","C","D"].indexOf(correct);if(a<0&&["0","1","2","3"].includes(correct))a=Number(correct);let opts=["option_a","option_b","option_c","option_d"].map(k=>String(val(r,k)).trim());let q=String(val(r,"question")).trim();if(!q||opts.some(x=>!x)||a<0)throw Error("Check question, option_a–option_d and correct_answer (A/B/C/D) for test "+id+".");if(!groups.has(id))groups.set(id,{id,title:String(val(r,"title",id)),exam:String(val(r,"exam","Odisha Exams")),type:String(val(r,"type","free")).toLowerCase()==="paid"?"paid":"free",minutes:Number(val(r,"minutes",30)),marks:Number(val(r,"marks",1)),negative:Number(val(r,"negative",.25)),items:[]});groups.get(id).items.push({q,o:opts,a,e:String(val(r,"explanation",""))})}
+for(let [id,t] of groups){let i=tests.findIndex(x=>x.id===id);if(i>=0)tests[i]=t;else tests.push(t)}save();msg.innerHTML=`<div class="success">Imported ${rows.length} questions across ${groups.size} test(s). Existing matching test IDs were replaced.</div>`;$("excelFile").value="";
+}catch(err){msg.innerHTML='<div class="error">Import failed: '+escapeHtml(err.message)+'</div>'}}
+function download(name,content,type){let blob=new Blob([content],{type}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=name;a.click();URL.revokeObjectURL(url)}
+$("templateBtn").onclick=()=>{if(!window.XLSX){$("importMsg").innerHTML='<div class="error">Excel library not loaded. Check internet and reload.</div>';return}let headers=["test_id","title","exam","type","minutes","marks","negative","question","option_a","option_b","option_c","option_d","correct_answer","explanation"];let sample=["odisha-si-gk-02","Odisha SI · GK Mock Test 02","Odisha SI","free",30,1,.25,"Sample question?","Option A","Option B","Option C","Option D","B","Write a short explanation here."];let ws=XLSX.utils.aoa_to_sheet([headers,sample]);ws["!cols"]=headers.map(()=>({wch:22}));let wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Questions");XLSX.writeFile(wb,"Odisha_Exam_Desk_Question_Template.xlsx")};
+function backup(){download("odisha-exam-desk-backup.json",JSON.stringify(tests,null,2),"application/json")}
+$("backupBtn").onclick=backup;$("exportJson").onclick=backup;
+$("restoreFile").onchange=async e=>{let f=e.target.files[0];if(!f)return;try{let data=JSON.parse(await f.text());if(!Array.isArray(data)||data.some(t=>!t.id||!Array.isArray(t.items)))throw Error("Invalid backup format");if(!confirm("Replace all current tests with this backup?"))return;tests=data;save();$("backupMsg").innerHTML='<div class="success">Backup restored successfully.</div>'}catch(err){$("backupMsg").innerHTML='<div class="error">'+escapeHtml(err.message)+'</div>'}e.target.value=""};
+function startQuiz(id){let t=tests.find(x=>x.id===id);if(!t||!t.items.length)return;quiz=t;qIndex=0;chosen={};seconds=t.minutes*60;$("quizModal").classList.add("show");$("quizTitle").textContent=t.title;drawQ();clearInterval(clock);clock=setInterval(()=>{seconds--;$("quizTimer").textContent=Math.floor(seconds/60).toString().padStart(2,"0")+":"+String(seconds%60).padStart(2,"0");if(seconds<=0)finishQuiz()},1000)}
+function drawQ(){let q=quiz.items[qIndex];$("quizCount").textContent=`Question ${qIndex+1} of ${quiz.items.length}`;$("quizBody").innerHTML=`<h3>${qIndex+1}. ${escapeHtml(q.q)}</h3>${q.o.map((o,i)=>`<button class="option ${chosen[qIndex]===i?"sel":""}" data-i="${i}">${"ABCD"[i]}. ${escapeHtml(o)}</button>`).join("")}`;$("quizBody").querySelectorAll("[data-i]").forEach(b=>b.onclick=()=>{chosen[qIndex]=+b.dataset.i;drawQ()});$("quizPrev").disabled=qIndex===0;$("quizNext").disabled=qIndex===quiz.items.length-1}
+$("quizPrev").onclick=()=>{if(qIndex>0){qIndex--;drawQ()}};$("quizNext").onclick=()=>{if(qIndex<quiz.items.length-1){qIndex++;drawQ()}};$("quizSubmit").onclick=()=>{if(confirm("Submit this test?"))finishQuiz()};
+function finishQuiz(){clearInterval(clock);let c=0,w=0,u=0;quiz.items.forEach((q,i)=>{if(chosen[i]===undefined)u++;else if(chosen[i]===q.a)c++;else w++});let score=c*(quiz.marks??1)-w*(quiz.negative??0),total=quiz.items.length*(quiz.marks??1);$("quizBody").innerHTML=`<h2>Result: ${score.toFixed(2)} / ${total}</h2><p>Correct: ${c} · Incorrect: ${w} · Unanswered: ${u}</p><h3>Answer review</h3>${quiz.items.map((q,i)=>`<div class="panel" style="margin:9px 0"><b>Q${i+1}. ${escapeHtml(q.q)}</b><p>Your answer: ${chosen[i]===undefined?"Not attempted":escapeHtml(q.o[chosen[i]])}</p><p style="color:#20713c">Correct: ${escapeHtml(q.o[q.a])}</p><p class="muted">${escapeHtml(q.e)}</p></div>`).join("")}`;$("quizPrev").classList.add("hidden");$("quizNext").classList.add("hidden");$("quizSubmit").textContent="Close";$("quizSubmit").onclick=()=>{$("quizModal").classList.remove("show");$("quizPrev").classList.remove("hidden");$("quizNext").classList.remove("hidden");$("quizSubmit").textContent="Submit";$("quizSubmit").onclick=()=>{if(confirm("Submit this test?"))finishQuiz()}}}
+renderAll();$("quizTimer").textContent="00:00";
+</script>
+<script>
+// Install prompt for supported Android browsers (usually Chrome).
+let deferredInstallPrompt = null;
+const installAppBtn = document.getElementById('installAppBtn');
+window.addEventListener('beforeinstallprompt', (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  if (installAppBtn) installAppBtn.hidden = false;
+});
+if (installAppBtn) {
+  installAppBtn.addEventListener('click', async () => {
+    if (!deferredInstallPrompt) {
+      alert('If the install option is not shown, open this website in Chrome, tap ⋮, then choose "Install app" or "Add to Home screen".');
+      return;
+    }
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installAppBtn.hidden = true;
+  });
+}
+window.addEventListener('appinstalled', () => {
+  if (installAppBtn) installAppBtn.hidden = true;
+});
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(err => console.warn('Service worker registration failed:', err));
+  });
+}
+</script>
+
+</body></html>
